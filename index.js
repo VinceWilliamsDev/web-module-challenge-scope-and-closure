@@ -28,9 +28,16 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ *  counter1 increments the count variable inside the counterMaker function, while counter2 increments the count variable on line 46.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ *  counter1 uses a closure because it calls counterMaker() which in turn calls counter() and uses the count variable in counterMaker().
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * counter1 would be better if you were tying to keep count of multiple things as you could have multiple variables all use counterMaker() for their seperate counters.
+ * counter2 would be better if you only need a single counter since it is simpler and more easy to troubleshoot if something goes wrong.
  *
 */
 
@@ -56,11 +63,24 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+console.log("task 2")
 
-    /*Code Here*/
 
+function inning(){
+  return Math.round(Math.random() * 2);
 }
+
+console.log(inning());
+console.log(inning());
+console.log(inning());
+console.log(inning());
+console.log(inning());
+console.log(inning());
+console.log(inning());
+console.log(inning());
+console.log(inning());
+console.log(inning());
+
 
 /* Task 3: finalScore()
 
@@ -76,11 +96,34 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+console.log("task 3");
 
-  /*Code Here*/
-
+function finalScore(callback, number){
+  let home = 0;
+  let away = 0;
+  for (let i=0; i< number; i++) {
+    home = home + callback();
+    away = away + callback();
+  }
+  return {
+    "Home": home, 
+    "Away": away
+  };
 }
+
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
+console.log(finalScore(inning, 9));
 
 /* Task 4: 
 
@@ -103,8 +146,17 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(callback, gameLength) {
+  home = 0;
+  away = 0; 
+
+  for (let i = 1; i <= gameLength; i++) {
+    home = home + callback();
+    away = away + callback();
+    console.log(`Inning ${i}: ${home} - ${away}`);
+  }
+
+  console.log(`Final Score: ${home} - ${away}`);
 }
 
-
+scoreboard(inning, 9);
